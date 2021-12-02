@@ -1,0 +1,48 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestion de Estacionamientos {% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="col-md-4 offset-md-4">
+        <h2 style="color: blue;">Editar Estacionamientos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/edicionEstacion" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtEstacionamiento" name="txtEstacionamiento" value="{{estacion.nombre_estac}}" class="form-control" placeholder="Estacion" readonly required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtDireccion" name="txtDireccion" value="{{estacion.direccion}}" class="form-control" placeholder="Direccion" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtTarifa" name="txtTarifa" value="{{estacion.tarifa}}" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtEspacios" name="txtEspacios" value="{{estacion.nro_espacios}}" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtCapacidad" name="txtCapacidad" value="{{estacion.espacio_disponible}}" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtTelefono" name="txtTelefono" value="{{estacion.telefono}}" class="form-control" placeholder="Telefono" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtDisponibilidad" name="txtDisponibilidad" value="{{estacion.disponibilidad}}" class="form-control" placeholder="Disponibilidad" required>
+                    </div>
+                    <br>
+                    <div class="form-group text-center"">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

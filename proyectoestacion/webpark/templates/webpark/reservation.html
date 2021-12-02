@@ -1,0 +1,45 @@
+{% extends "webpark/layout.html" %}
+
+{% block content %}  
+<br>
+<br>
+<br>
+<div class="container">
+  <h1 style="color: rgb(61, 61, 68);">Listado de Usuarios</h1>
+        <div class="table-responsive py-2" style="display: flex; align-items: center; justify-content: center;">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripcion</th>
+                        <th>Fecha-Entrada</th>
+                        <th>Fecha-Salida</th>
+                        <th>Monto</th>
+                        <th>Id-Estacionamiento</th>
+                        <th>Nro-Placa</th>
+                        <th>Id-usuario</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in response %}
+                    <tr>
+                        <td class="text-center">{{c.id}}</td>
+                        <td class="text-center">{{c.descripcion}}</td>
+                        <td class="text-center">{{c.fecha_entrada}}</td>
+                        <td class="text-center">{{c.fecha_salida}}</td>
+                        <td class="text-center">{{c.monto}}</td>
+                        <td class="text-center">{{c.id_estacionamiento}}</td>
+                        <td class="text-center">{{c.nro_placa}}</td>
+                        <td class="text-center">{{c.id_usuario}}</td>
+                        <td><a href="#" class="btn btn-info">Editar</a></td>
+                        <td><a href="#" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

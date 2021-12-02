@@ -1,0 +1,91 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestion de Estacionamientos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" >
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2 style="color: blue;">Gestion de Estacionamientos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarEstacion" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtEstacionamiento" name="txtEstacionamiento" class="form-control" placeholder="Estacion" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtDireccion" name="txtDireccion" class="form-control" placeholder="Direccion" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtTarifa" name="txtTarifa" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtEspacios" name="txtEspacios" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="txtCapacidad" name="txtCapacidad" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" placeholder="Telefono" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="txtDisponibilidad" name="txtDisponibilidad" class="form-control" placeholder="Disponibilidad" required>
+                    </div>
+                    <br>
+                    <div class="form-group text-center"">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-9">
+        <h1 style="color: blue">Listado de Estacionamientos</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Estacion</th>
+                        <th>Direccion</th>
+                        <th>Tarifa</th>
+                        <th>Nº Espacios</th>
+                        <th>Capacidad</th>
+                        <th>Telefono</th>
+                        <th>Disponibilidad</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in estacionamiento %}
+                    <tr>
+                        <td class="text-center">{{forloop.counter}}</td>
+                        <td class="text-center">{{c.nombre_estac}}</td>
+                        <td class="text-center">{{c.direccion}}</td>
+                        <td class="text-center">{{c.tarifa}}</td>
+                        <td class="text-center">{{c.nro_espacios}}</td>
+                        <td class="text-center">{{c.espacio_disponible}}</td>
+                        <td class="text-center">{{c.telefono}}</td>
+                        <td class="text-center">{{c.disponibilidad}}</td>
+                        <td><a href="editarEstacion/{{c.nombre_estac}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarEstacion/{{c.nombre_estac}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

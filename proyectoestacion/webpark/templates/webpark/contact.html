@@ -1,0 +1,166 @@
+{% extends "webpark/layout.html" %}
+
+{% block content %}  
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Estacionamientos</h2>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <section id="team" class="team ">
+        <div class="container">
+  
+          <div class="row">
+  
+            <div class="col-lg-6">
+              <div class="member d-flex align-items-start">
+                <div class="card">
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1g0hBYvHvAINRP_CliQlVt6CT89rfdJcr" width="550" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="card-body">
+                      <p class="card-text">Tu vehiculo seguro, no cometas infracciones!!!</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-6">
+                <div class="member d-flex align-items-start">
+                  <div class="card">
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1tdx9cg3Dw6bCt0TzbGNgHh0sXXKdWUmb" width="550" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="card-body">
+                        <p class="card-text">Tu vehiculo seguro, no cometas infracciones!!!</p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+  
+              <div class="col-lg-6">
+                <div class="member d-flex align-items-start">
+                  <div class="card">
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1jjiEUxGaTn-Yk0NzjOzKP8JRyIfTxCGM" width="550" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="card-body">
+                        <p class="card-text">Tu vehiculo seguro, no cometas infracciones!!!</p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+  
+              <div class="col-lg-6">
+                <div class="member d-flex align-items-start">
+                  <div class="card">
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1d2LLl4FEW5cKnOMu6xRsexxSIiFzv1Fu" width="550" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                      <div class="card-body">
+                        <p class="card-text">Tu vehiculo seguro, no cometas infracciones!!!</p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+  
+        </div>
+      </section>
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+        
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible" >
+                    <strong class="text-dark">{{ message }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <h2 style="color: rgb(61, 61, 68);">Gestion de Estacionamientos</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/registrarEstacion" method="post">{% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" id="txtEstacionamiento" name="txtEstacionamiento" class="form-control" placeholder="Estacion" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="text" id="txtDireccion" name="txtDireccion" class="form-control" placeholder="Direccion" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="number" id="txtTarifa" name="txtTarifa" class="form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="number" id="txtEspacios" name="txtEspacios" class="form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="number" id="txtCapacidad" name="txtCapacidad" class="form-control" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" placeholder="Telefono" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input type="text" id="txtDisponibilidad" name="txtDisponibilidad" class="form-control" placeholder="Disponibilidad" required>
+                            </div>
+                            <br>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-8 col-xl-9">
+                <h1 style="color: rgb(61, 61, 68);">Listado de Estacionamientos</h1>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Estacion</th>
+                                <th>Direccion</th>
+                                <th>Tarifa</th>
+                                <th>Capacidad</th>
+                                <th>Espacio Disponible</th>
+                                <th>Telefono</th>
+                                <th>Disponibilidad</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in estacionamiento %}
+                            <tr>
+                                <td class="text-center">{{forloop.counter}}</td>
+                                <td class="text-center">{{c.nombre_estac}}</td>
+                                <td class="text-center">{{c.direccion}}</td>
+                                <td class="text-center">{{c.tarifa}}</td>
+                                <td class="text-center">{{c.nro_espacios}}</td>
+                                <td class="text-center">{{c.espacio_disponible}}</td>
+                                <td class="text-center">{{c.telefono}}</td>
+                                <td class="text-center">{{c.disponibilidad}}</td>
+                                <td><a href="editarEstacion/{{c.nombre_estac}}" class="btn btn-info">Editar</a></td>
+                                <td><a href="eliminarEstacion/{{c.nombre_estac}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+      <br>
+            <div class="text-center"><a href="/contact/reservation"><button type="submit" style="font-family: 'Raleway',sans-serif;font-weight: 500;
+              font-size: 14px;letter-spacing: 1px;display: inline-block;padding: 14px 32px;
+              border-radius: 4px;transition: 0.5s;line-height: 1;color: #fff;-webkit-animation-delay: 0.8s;
+              animation-delay: 0.8s;background: #d9232d;">Verificar Reservas</button></a></div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+  {% endblock %}
